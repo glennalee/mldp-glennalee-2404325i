@@ -6,18 +6,15 @@ import streamlit as st
 import pandas as pd
 import joblib
 
-# =========================================================
+
 # PAGE CONFIGURATION
-# =========================================================
 st.set_page_config(
     page_title="Loan Repayment Risk Assessment",
     page_icon="💳",
     layout="centered"
 )
 
-# =========================================================
 # MODEL & FEATURE CONFIGURATION
-# =========================================================
 # Path to the trained LDA model
 MODEL_PATH = "loan_approval_model - Copy.pkl"
 
@@ -70,9 +67,7 @@ INTENT_MAP = {
     "VENTURE": "loan_intent_VENTURE"
 }
 
-# =========================================================
 # MODEL LOADING
-# =========================================================
 @st.cache_resource
 def load_model(path):
     """Load pre-trained LDA model from disk."""
@@ -80,9 +75,7 @@ def load_model(path):
 
 model = load_model(MODEL_PATH)
 
-# =========================================================
 # DATA ENCODING FUNCTION
-# =========================================================
 def build_encoded_row(
     loan_amnt,
     loan_int_rate,
@@ -131,17 +124,13 @@ def build_encoded_row(
 
     return pd.DataFrame([[row[c] for c in FEATURE_ORDER]], columns=FEATURE_ORDER)
 
-# =========================================================
 # PAGE HEADER & INSTRUCTIONS
-# =========================================================
 st.title("Loan Repayment Risk Assessment")
 st.caption(
     "Early-stage decision support tool designed to minimise missed high-risk applicants."
 )
 
-# =========================================================
 # SIDEBAR CONFIGURATION
-# =========================================================
 st.sidebar.header("Screening Mode")
 
 # Allow user to select between applicant and staff perspectives
@@ -166,9 +155,7 @@ st.sidebar.markdown("---")
 st.sidebar.caption(f"Model: LDA")
 st.sidebar.caption(f"Decision threshold: {THRESHOLD:.0%}")
 
-# =========================================================
 # INPUT FORM
-# =========================================================
 st.markdown("### Applicant Financial Profile")
 
 with st.form("loan_form"):
@@ -247,9 +234,7 @@ with st.form("loan_form"):
 
     submitted = st.form_submit_button("Assess Risk")
 
-# =========================================================
 # RISK PREDICTION & RESULTS DISPLAY
-# =========================================================
 if submitted:
     # Encode user input for model prediction
     X_new = build_encoded_row(
