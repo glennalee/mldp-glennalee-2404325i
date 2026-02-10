@@ -19,7 +19,7 @@ st.set_page_config(
 # MODEL & FEATURE CONFIGURATION
 # =========================================================
 # Path to the trained LDA model
-MODEL_PATH = "loan_approval_model.pkl"
+MODEL_PATH = "loan_approval_model - Copy.pkl"
 
 # Probability threshold above which an applicant is flagged as high-risk
 # Set conservatively to minimize false negatives (missed defaulters)
